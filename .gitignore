@@ -1,0 +1,6 @@
+# App output
+__pycache__/
+db.sqlite3
+
+# Dev configs
+.vscode/
