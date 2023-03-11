@@ -20,3 +20,6 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+    def votes_percent(self):
+        return 100 * self.votes / sum(choice.votes for choice in self.question.choice_set.all())
