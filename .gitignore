@@ -4,3 +4,4 @@ db.sqlite3
 
 # Dev configs
 .vscode/
+.DS_Store
