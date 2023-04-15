@@ -1,0 +1,7 @@
+<h1>{{ player.handle }}</h1>
+<ul>
+    {% for score in player.score_set.all %}
+    <li><a href="{% url 'league:game' score.game.id %}">{{ score.game }}</a> - {{ score.score }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'league:index' %}">Back to main</a>

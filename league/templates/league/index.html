@@ -1,0 +1,9 @@
+{% if leagues %}
+<ul>
+    {% for league in leagues %}
+    <li><a href="{% url 'league:league' league.id %}">{{ league.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No leagues are available.</p>
+{% endif %}

@@ -1,0 +1,7 @@
+<h1>{{ league.name }}</h1>
+<ul>
+    {% for game in league.game_set.all %}
+    <li><a href="{% url 'league:game' game.id %}">{{game}}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'league:index' %}">Back to main</a>
