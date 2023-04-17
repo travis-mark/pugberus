@@ -17,17 +17,17 @@ class Game(models.Model):
     """An individual game or match"""
     league = models.ForeignKey(League, on_delete=models.CASCADE)
     game_no = models.IntegerField()
-    game_date = models.DateTimeField() # DateField
+    game_date = models.DateField()
     result = models.CharField(max_length=200)
     def __str__(self) -> str:
-        return f"{self.league.name} #{self.game_no} {self.game_date}" # Date format
+        return f"{self.league.name} #{self.game_no} {self.game_date:%m/%d}" # Date format
 
 class Score(models.Model):
     """One player's performance within a match"""
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     score = models.IntegerField()
-    guesses = models.CharField(max_length=200) # Optional
-    raw_score = models.CharField(max_length=200) # Optional
+    guesses = models.CharField(max_length=200, blank=True)
+    raw_score = models.CharField(max_length=200, blank=True)
     def __str__(self) -> str:
         return f'{self.player} {self.game} Score: {self.score}'
