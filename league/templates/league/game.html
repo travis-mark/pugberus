@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'league/style.css' %}">
+
 <h1>
     <a href="{% url 'league:league' game.league.id %}">{{game.league.name}}</a>
     {{ game.game_no }} - {{ game.game_date }}

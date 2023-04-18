@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'league/style.css' %}">
+
 <h1>{{ league.name }}</h1>
 <ul>
     {% for game in league.game_set.all %}

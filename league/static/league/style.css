@@ -1,0 +1,22 @@
+html {
+    --body-fg: #C1CAD2;
+    --sidebar-bg: #181d27;
+    --link-color: #93D7B7;
+}
+body {
+    font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
+    background: var(--sidebar-bg);
+    color: var(--body-fg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+h1 {
+    margin: 0.6em 0;
+    line-height: 1.1em;
+}
+
+a {
+    color: var(--link-color);
+}
