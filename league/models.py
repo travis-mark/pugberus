@@ -18,7 +18,7 @@ class Game(models.Model):
     league = models.ForeignKey(League, on_delete=models.CASCADE)
     game_no = models.IntegerField()
     game_date = models.DateField()
-    result = models.CharField(max_length=200)
+    result = models.CharField(max_length=200, blank=True)
     def __str__(self) -> str:
         return f"{self.league.name} #{self.game_no} {self.game_date:%m/%d}" # Date format
 
