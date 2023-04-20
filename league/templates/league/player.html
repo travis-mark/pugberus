@@ -3,6 +3,26 @@
 <link rel="icon" type="image/x-icon" href="{% static 'league/pugberus.png' %}">
 
 <h1>{{ player.handle }}</h1>
+<h2>Summary</h2>
+<table>
+    <tr>
+        <td>League</td>
+        <td>#</td>
+        <td>Min</td>
+        <td>Avg</td>
+        <td>Max</td>
+    </tr>
+    {% for league in leagues %}
+    <tr>
+        <td><a href="{% url 'league:league' league.game__league__id %}">{{ league.game__league__name }}</a></td>
+        <td>{{ league.count }}</td>
+        <td>{{ league.min_score }}</td>
+        <td>{{ league.avg_score }}</td>
+        <td>{{ league.max_score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h2>Games</h2>
 <ul>
     {% for score in player.score_set.all %}
     <li><a href="{% url 'league:game' score.game.id %}">{{ score.game }}</a> - {{ score.score }}</li>

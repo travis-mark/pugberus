@@ -4,7 +4,7 @@
 
 <h1>{{ league.name }}</h1>
 <ul>
-    {% for game in league.game_set.all %}
+    {% for game in games %}
     <li><a href="{% url 'league:game' game.id %}">{{game}}</a></li>
     {% endfor %}
 </ul>
