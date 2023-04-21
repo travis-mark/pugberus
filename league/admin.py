@@ -7,7 +7,10 @@ class ScoreInline(admin.TabularInline):
 
 class GameAdmin(admin.ModelAdmin):
     inlines = [ScoreInline]
-    #list_display = ('question_text', 'pub_date', 'was_published_recently')
+    list_display = ('league_name', 'game_no', 'game_date')
+    list_filter = ['game_date']
+    def league_name(self, obj):
+        return obj.league.name
 
 admin.site.register(League)
 admin.site.register(Player)

@@ -1,4 +1,4 @@
-from django.db.models import Sum, Avg, Min, Max, Count
+from django.db.models import Avg, Min, Max, Count, Func, FloatField
 from django.shortcuts import get_object_or_404, render
 from league.models import Game, League, Player
 
@@ -11,13 +11,19 @@ def index(request):
 
 def league(request, league_id):
     _league = get_object_or_404(League, pk=league_id)
+    _players = _league.game_set.values('score__player__handle', 'score__player__id').annotate(
+        avg_score=Func(Avg('score__score'), 1, function='ROUND', output_field=FloatField()),
+        min_score=Min('score__score'),
+        max_score=Max('score__score'),
+        count=Count('id')
+    )
     _games = _league.game_set.order_by('-game_no').all()
-    return render(request, 'league/league.html', {'league': _league, 'games': _games})
+    return render(request, 'league/league.html', {'league': _league, 'games': _games, 'players': _players})
 
 def player(request, player_id):
     _player = get_object_or_404(Player, pk=player_id)
     _leagues = _player.score_set.values('game__league__name', 'game__league__id').annotate(
-        avg_score=Avg('score'),
+        avg_score=Func(Avg('score'), 1, function='ROUND', output_field=FloatField()),
         min_score=Min('score'),
         max_score=Max('score'),
         count=Count('id')
