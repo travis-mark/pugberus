@@ -21,6 +21,13 @@ class Game(models.Model):
     result = models.CharField(max_length=200, blank=True)
     def __str__(self) -> str:
         return f"{self.league.name} #{self.game_no} {self.game_date:%m/%d}" # Date format
+    def winner(self):
+        """Return game winner (lowest score)"""
+        scores = self.score_set.all()
+        if len(scores) == 0:
+            return None
+        else:
+            return min(scores, key=lambda x: x.score)
 
 class Score(models.Model):
     """One player's performance within a match"""

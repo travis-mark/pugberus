@@ -6,11 +6,11 @@
 <h2>Summary</h2>
 <table>
     <tr>
-        <td>Player</td>
-        <td>#</td>
-        <td>Min</td>
-        <td>Avg</td>
-        <td>Max</td>
+        <th>Player</th>
+        <th>#</th>
+        <th>Min</th>
+        <th>Avg</th>
+        <th>Max</th>
     </tr>
     {% for player in players %}
     <tr>
@@ -23,9 +23,20 @@
     {% endfor %}
 </table>
 <h2>Games</h2>
-<ul>
+<table>
+    <tr>
+        <th>Game No</th>
+        <th>Date</th>
+        <th>Winner</th>
+        <th>Score</th>
+    </tr>
     {% for game in games %}
-    <li><a href="{% url 'league:game' game.id %}">{{game}}</a></li>
+    <tr>
+        <td><a href="{% url 'league:game' game.id %}">{{game.game_no}}</a></td>
+        <td>{{game.game_date}}</td>
+        <td>{{game.winner.player.handle}}</td>
+        <td>{{game.winner.score}}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 <a href="{% url 'league:index' %}">Back to main</a>

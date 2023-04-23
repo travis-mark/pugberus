@@ -22,13 +22,14 @@ def league(request, league_id):
 
 def player(request, player_id):
     _player = get_object_or_404(Player, pk=player_id)
+    _scores = _player.score_set.order_by('game__league__name', '-game__game_no')
     _leagues = _player.score_set.values('game__league__name', 'game__league__id').annotate(
         avg_score=Func(Avg('score'), 1, function='ROUND', output_field=FloatField()),
         min_score=Min('score'),
         max_score=Max('score'),
         count=Count('id')
     )
-    return render(request, 'league/player.html', {'player': _player, 'leagues': _leagues})
+    return render(request, 'league/player.html', {'player': _player, 'scores': _scores, 'leagues': _leagues})
 
 def game(request, game_id):
     _game = get_object_or_404(Game, pk=game_id)
