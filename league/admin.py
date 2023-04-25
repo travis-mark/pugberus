@@ -8,7 +8,7 @@ class ScoreInline(admin.TabularInline):
 class GameAdmin(admin.ModelAdmin):
     inlines = [ScoreInline]
     list_display = ('league_name', 'game_no', 'game_date')
-    list_filter = ['game_date']
+    list_filter = ['league__name', 'game_date']
     def league_name(self, obj):
         return obj.league.name
 
