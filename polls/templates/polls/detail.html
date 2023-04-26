@@ -1,17 +1,71 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'style.css' %}">
 <link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
+<style>
+    .poll-option {
+        background-color: clear;
+        border-color: var(--link-color);
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        box-sizing: border-box;
+        color: var(--link-color);
+        cursor: pointer;
+        display: block;
+        height: 41px;
+        line-height: 21px;
+        min-height: 41px;
+        padding-bottom: 9px;    
+        padding-left: 12px;
+        padding-right: 24px;
+        padding-top: 9px;
+        position: relative;
+        margin-bottom: 8px;
+        max-width: 550px;
+    }
+    .poll-option:hover {
+        background-color: var(--link-color);
+        color: black;
+    }
+    .poll-option-text { 
+        font-family: sans-serif;
+        font-kerning: auto;
+        font-size: 14px;
+        font-weight: 600;
+        height: 21px;
+        line-height: 21px;
+        overflow-wrap: break-word;
+        text-align: center;
+        word-break: break-word; 
+    }
+</style>
+<script>
+    function setAndSubmit(value) {
+        document.getElementById("choice").value = value;
+        document.getElementById("form").submit();
+    }
+</script>
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-<fieldset>
-    <legend><h1>{{ question.question_text }}</h1></legend>
+<form id="form" action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <h1>{{ question.question_text }}</h1>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="hidden" name="choice" id="choice">
     {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        <div class="poll-option" onclick="setAndSubmit('{{ choice.id }}')">
+            <div class="poll-option-text">{{ choice.choice_text }}</div>
+        </div>
     {% endfor %}
-</fieldset>
-<input type="submit" value="Vote">
-<a href={% url 'polls:results' question.id %}>Show Results</a>
+    <noscript>
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Vote">
+    </noscript>
+    <p>
+        {{question.votes_total}} votes
+        •
+        <a href={% url 'polls:results' question.id %}>Show Results</a>
+    </p>    
 </form>

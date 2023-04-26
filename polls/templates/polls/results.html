@@ -3,11 +3,16 @@
 <link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
 
 <style>
-  .bar {
+  .bar-cell {
+    border: 1px var(--link-color) solid; 
+    width: 240px;
+  }
+  .bar-text {
       display: block;
+      margin: 2px;
       width: 20px;
       height: 20px;
-      background-color: #2196F3;
+      background-color: var(--link-color);
   }
 </style>
 
@@ -16,10 +21,12 @@
 <table style="padding: 0 0 8px 0">
   {% for choice in question.choice_set.all %}
   <tr>
-    <td style="padding-right: 20px">{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</td>
-    <td style="width: 240px; background-color: #CCC">
-      <div class="bar" style="width: {{ choice.votes_percent }}%;"></div>
+    <td style="padding-right: 20px">{{ choice.choice_text }}</td>
+    <td class="bar-cell">
+      <div class="bar-text" style="width: {{ choice.votes_percent }}%;"></div>
     </td>
+    <td>{{ choice.votes }}</td>
+    <td>{{ choice.votes_percent|floatformat:1 }}%</td>
   </tr>
   {% endfor %}
 </table>
