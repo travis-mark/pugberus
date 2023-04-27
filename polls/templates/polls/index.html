@@ -1,7 +1,11 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
+{% extends "base.html" %}
 
+{% block title %}
+Pugberus | Polls
+{% endblock %}
+
+{% block content %}
+<h1>Polls</h1>
 {% if latest_question_list %}
 <ul>
     {% for question in latest_question_list %}
@@ -11,3 +15,6 @@
 {% else %}
 <p>No polls are available.</p>
 {% endif %}
+{% endblock %}
+
+

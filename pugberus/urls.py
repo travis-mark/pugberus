@@ -21,8 +21,8 @@ admin.site.site_header = 'Pugberus Admin'
 admin.site.site_title = 'Pugberus Site Admin'
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home, name='home'),
     path('polls/', include('polls.urls')),
     path('league/', include('league.urls')),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
 ]

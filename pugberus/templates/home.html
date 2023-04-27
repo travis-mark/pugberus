@@ -1,11 +1,8 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
+{% extends "base.html" %}
 
-<body>
-    <h1>Pugberus</h1>
-    <ul>
-        <li><a href="{% url 'polls:index' %}">Polls</a></li>
-        <li><a href="{% url 'league:index' %}">League</a></li>
-    </ul>
-</body>
+{% block title %}
+Pugberus | Home
+{% endblock %}
+
+{% block content %}
+{% endblock %}

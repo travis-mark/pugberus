@@ -1,7 +1,11 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
+{% extends "base.html" %}
 
+{% block title %}
+Pugberus | Leagues
+{% endblock %}
+
+{% block content %}
+<h1>Leagues</h1>
 {% if leagues %}
 <ul>
     {% for league in leagues %}
@@ -11,3 +15,4 @@
 {% else %}
 <p>No leagues are available.</p>
 {% endif %}
+{% endblock %}

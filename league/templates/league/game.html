@@ -1,7 +1,10 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
+{% extends "base.html" %}
 
+{% block title %}
+Pugberus | {{game.league.name}} #{{ game.game_no }}
+{% endblock %}
+
+{% block content %}
 <h1>
     <a href="{% url 'league:league' game.league.id %}">{{game.league.name}}</a>
     {{ game.game_no }} - {{ game.game_date }}
@@ -13,3 +16,4 @@
     </li>
     {% endfor %}
 </ul>
+{% endblock %}

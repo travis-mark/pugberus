@@ -1,7 +1,10 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
-<link rel="icon" type="image/x-icon" href="{% static 'pugberus.png' %}">
+{% extends "base.html" %}
 
+{% block title %}
+Pugberus | {{ league.name }}
+{% endblock %}
+
+{% block content %}
 <h1>{{ league.name }}</h1>
 <h2>Summary</h2>
 <table>
@@ -39,4 +42,5 @@
     </tr>
     {% endfor %}
 </table>
-<a href="{% url 'league:index' %}">Back to main</a>
+{% endblock %}
+
