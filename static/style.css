@@ -23,6 +23,18 @@ a {
 p { 
     font-family: sans-serif;
 }
+table {
+    background-color: var(--body-bg2);
+    border-collapse: collapse;
+    width: 100%;
+}
+th {
+    background-color: var(--body-bg3);
+    text-align: left;
+}
+tr:not(:last-child) td {
+    border-bottom: 2px solid var(--body-bg3);
+}
 .content {
     padding: 8px;
 }
