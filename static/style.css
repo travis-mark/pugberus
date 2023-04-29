@@ -82,4 +82,6 @@ tr:not(:last-child) td {
 /* #endregion */
 /* #region Utility */
 .mb-8 { margin-bottom: 8px; }
+.mw-80 { max-width: 80ch; }
+.center { margin: 0 auto; }
 /* #endregion */

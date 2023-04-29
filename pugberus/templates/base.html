@@ -11,11 +11,20 @@
         <div class="container">
             <div class="logo">
                 <a href="{% url 'home' %}">Pugberus</a>
+                
             </div>
             <ul class="nav">
                 <li><a href="{% url 'polls:index' %}">Polls</a></li>
                 <li><a href="{% url 'league:index' %}">League</a></li>
-                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                <li>
+                    <a href="{% url 'admin:index' %}">
+                    {% if request.user.is_authenticated  %}
+                        Admin
+                    {% else %}
+                        Login
+                    {% endif %}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
