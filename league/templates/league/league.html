@@ -4,10 +4,13 @@
 Pugberus | {{ league.name }}
 {% endblock %}
 
+{% block topsubbar %}
+<a href="{% url 'league:index' %}">Leagues</a> > {{ league.name }}
+{% endblock %}
+
 {% block content %}
-<h1>{{ league.name }}</h1>
-<h2>Summary</h2>
-<table>
+<table class="mb-8">
+    <caption>Summary</caption>
     <tr>
         <th>Player</th>
         <th>#</th>
@@ -25,8 +28,8 @@ Pugberus | {{ league.name }}
     </tr>
     {% endfor %}
 </table>
-<h2>Games</h2>
 <table>
+    <caption>Games</caption>
     <tr>
         <th>Game No</th>
         <th>Date</th>

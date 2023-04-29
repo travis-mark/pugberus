@@ -1,3 +1,4 @@
+/* #region Elements */
 * {
     font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
 }
@@ -28,6 +29,9 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+table caption {
+    text-align: left;
+}
 th {
     background-color: var(--body-bg3);
     text-align: left;
@@ -35,6 +39,8 @@ th {
 tr:not(:last-child) td {
     border-bottom: 2px solid var(--body-bg3);
 }
+/* #endregion */
+/* #region Classes */
 .content {
     padding: 8px;
 }
@@ -73,3 +79,7 @@ tr:not(:last-child) td {
 .topbar .nav li a:hover {
     text-decoration: underline;
 }
+/* #endregion */
+/* #region Utility */
+.mb-8 { margin-bottom: 8px; }
+/* #endregion */
