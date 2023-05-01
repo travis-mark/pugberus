@@ -34,3 +34,8 @@ def player(request, player_id):
 def game(request, game_id):
     _game = get_object_or_404(Game, pk=game_id)
     return render(request, 'league/game.html', {'game': _game})
+
+def chart(request, league_id):
+    _league = get_object_or_404(League, pk=league_id)
+    _games = _league.game_set.order_by('-game_no').all()
+    return render(request, 'league/chart.html', {'league': _league, 'games': _games})

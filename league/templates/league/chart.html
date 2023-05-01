@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="myplot"></div>
+<style>
+    .plot {
+        background: none;
+    }
+</style>
+<script type="module">
+    import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+    const data = [
+        {% for game in games %}
+        {% for score in game.score_set.all %}
+        { Date: new Date("{{ game.game_date }}"), Player: "{{ score.player.handle }}", Score: {{ score.score }} },
+        {% endfor %}
+        {% endfor %}
+    ]
+    const plot = Plot.plot({
+        className: 'plot',
+        color: { legend: true },
+        marks: [
+            Plot.lineY(data, { x: "Date", y: "Score", stroke: "Player" }),
+        ]
+    });
+    const div = document.querySelector("#myplot");
+    div.append(plot);
+</script>
+{% endblock %}
