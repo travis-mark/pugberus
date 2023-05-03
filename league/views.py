@@ -37,5 +37,11 @@ def game(request, game_id):
 
 def chart(request, league_id):
     _league = get_object_or_404(League, pk=league_id)
+    _players = _league.game_set.values('score__player__handle', 'score__player__id').annotate(
+        avg_score=Func(Avg('score__score'), 1, function='ROUND', output_field=FloatField()),
+        min_score=Min('score__score'),
+        max_score=Max('score__score'),
+        count=Count('id')
+    )
     _games = _league.game_set.order_by('-game_no').all()
-    return render(request, 'league/chart.html', {'league': _league, 'games': _games})
+    return render(request, 'league/chart.html', {'league': _league, 'games': _games, 'players': _players})

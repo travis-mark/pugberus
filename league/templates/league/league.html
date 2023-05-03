@@ -29,7 +29,7 @@ Pugberus | {{ league.name }}
     {% endfor %}
 </table>
 <table class="center mb-8 mw-80">
-    <caption>Games • <a href="{% url 'league:chart' league.id %}">Show Chart</a></caption>
+    <caption>Games | Table • <a href="{% url 'league:chart' league.id %}">Chart</a></caption>
     <tr>
         <th>Game No</th>
         <th>Date</th>
@@ -46,4 +46,3 @@ Pugberus | {{ league.name }}
     {% endfor %}
 </table>
 {% endblock %}
-

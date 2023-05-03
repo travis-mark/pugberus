@@ -1,7 +1,41 @@
 {% extends "base.html" %}
 
+{% block title %}
+Pugberus | {{ league.name }}
+{% endblock %}
+
+{% block topsubbar %}
+<a href="{% url 'league:index' %}">Leagues</a> > {{ league.name }}
+{% endblock %}
+
 {% block content %}
-<div id="myplot"></div>
+<table class="center mb-8 mw-80">
+    <caption>Summary</caption>
+    <tr>
+        <th>Player</th>
+        <th>#</th>
+        <th>Min</th>
+        <th>Avg</th>
+        <th>Max</th>
+    </tr>
+    {% for player in players %}
+    <tr>
+        <td><a href="{% url 'league:player' player.score__player__id %}">{{ player.score__player__handle }}</a></td>
+        <td>{{ player.count }}</td>
+        <td>{{ player.min_score }}</td>
+        <td>{{ player.avg_score }}</td>
+        <td>{{ player.max_score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table class="center mb-8 mw-80">
+    <caption>Games | <a href="{% url 'league:league' league.id %}">Table</a> • Chart</caption>
+    <tr>
+        <td>
+            <div id="myplot"></div>
+        </td>
+    </tr>
+</table>
 <style>
     .plot {
         background: none;
@@ -10,11 +44,11 @@
 <script type="module">
     import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
     const data = [
-        {% for game in games %}
-        {% for score in game.score_set.all %}
-        { Date: new Date("{{ game.game_date }}"), Player: "{{ score.player.handle }}", Score: {{ score.score }} },
-        {% endfor %}
-        {% endfor %}
+    {% for game in games %}
+    {% for score in game.score_set.all %}
+    { Date: new Date("{{ game.game_date }}"), Player: "{{ score.player.handle }}", Score: {{ score.score }} },
+    {% endfor %}
+    {% endfor %}
     ]
     const plot = Plot.plot({
         className: 'plot',
@@ -23,7 +57,9 @@
             Plot.lineY(data, { x: "Date", y: "Score", stroke: "Player" }),
         ]
     });
-    const div = document.querySelector("#myplot");
-    div.append(plot);
+    setTimeout(() => {
+        const div = document.querySelector("#myplot");
+        div.append(plot);
+    }, 100);
 </script>
 {% endblock %}
