@@ -33,6 +33,7 @@ class Score(models.Model):
     """One player's performance within a match"""
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    defeat = models.BooleanField()
     score = models.IntegerField()
     guesses = models.CharField(max_length=200, blank=True)
     raw_score = models.CharField(max_length=200, blank=True)
