@@ -5,15 +5,14 @@ Pugberus | {{ player.handle }}
 {% endblock %}
 
 {% block content %}
-<h1>{{ player.handle }}</h1>
-<h2>Summary</h2>
-<table>
+<table class="center mb-8 mw-80">
+    <caption>{{ player.handle }} - Summary</caption>
     <tr>
-        <th>League</th>
-        <th>#</th>
-        <th>Min</th>
-        <th>Avg</th>
-        <th>Max</th>
+        <th width="60%">League</th>
+        <th width="10%">#</th>
+        <th width="10%">Min</th>
+        <th width="10%">Avg</th>
+        <th width="10%">Max</th>
     </tr>
     {% for league in leagues %}
     <tr>
@@ -25,18 +24,16 @@ Pugberus | {{ player.handle }}
     </tr>
     {% endfor %}
 </table>
-<h2>Games</h2>
-<table>
+<table  class="center mb-8 mw-80">
+    <caption>Games</caption>
     <tr>
-        <th>League</th>
-        <th>Game No</th>
-        <th>Date</th>
-        <th>Score</th>
+        <th width="60%"></th>
+        <th width="30%">Date</th>
+        <th width="10%">Score</th>
     </tr>
     {% for score in scores %}
     <tr>
-        <td>{{score.game.league.name}}</td>
-        <td><a href="{% url 'league:game' score.game.id %}">{{ score.game.game_no }}</a></td>
+        <td>{{score.game.league.name}} #<a href="{% url 'league:game' score.game.id %}">{{ score.game.game_no }}</a></td>
         <td>{{score.game.game_date}}</td>
         <td>{{ score.score }}</td>
     </tr>

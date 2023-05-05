@@ -4,19 +4,15 @@
 Pugberus | {{ league.name }}
 {% endblock %}
 
-{% block topsubbar %}
-<a href="{% url 'league:index' %}">Leagues</a> > {{ league.name }}
-{% endblock %}
-
 {% block content %}
 <table class="center mb-8 mw-80">
-    <caption>Summary</caption>
+    <caption>{{ league.name }} - Summary</caption>
     <tr>
-        <th>Player</th>
-        <th>#</th>
-        <th>Min</th>
-        <th>Avg</th>
-        <th>Max</th>
+        <th width="60%">Player</th>
+        <th width="10%">#</th>
+        <th width="10%">Min</th>
+        <th width="10%">Avg</th>
+        <th width="10%">Max</th>
     </tr>
     {% for player in players %}
     <tr>
@@ -31,15 +27,13 @@ Pugberus | {{ league.name }}
 <table class="center mb-8 mw-80">
     <caption>Games | Table • <a href="{% url 'league:chart' league.id %}">Chart</a></caption>
     <tr>
-        <th>Game No</th>
-        <th>Date</th>
-        <th>Winner</th>
-        <th>Score</th>
+        <th width="60%"></th>
+        <th width="30%">Winner</th>
+        <th width="10%">Score</th>
     </tr>
     {% for game in games %}
     <tr>
-        <td><a href="{% url 'league:game' game.id %}">{{game.game_no}}</a></td>
-        <td>{{game.game_date}}</td>
+        <td>{{game.game_date}} - #<a href="{% url 'league:game' game.id %}">{{game.game_no}}</a></td>
         <td>{{game.winner.player.handle}}</td>
         <td>{{game.winner.score}}</td>
     </tr>
