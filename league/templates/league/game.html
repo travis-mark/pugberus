@@ -5,15 +5,30 @@ Pugberus | {{game.league.name}} #{{ game.game_no }}
 {% endblock %}
 
 {% block content %}
-<h1>
-    <a href="{% url 'league:league' game.league.id %}">{{game.league.name}}</a>
-    {{ game.game_no }} - {{ game.game_date }}
-</h1>
-<ul>
+<table class="center mb-8 mw-80">
+    <caption><a href="{% url 'league:league' game.league.id %}">{{game.league.name}}</a>
+    #{{ game.game_no }} - {{ game.game_date }}</caption>
+    <tr>
+        <th width="80%"></th>
+        <th width="10%">Defeat</th>
+        <th width="10%">Score</th>
+    </tr>
     {% for score in game.score_set.all %}
-    <li>
-        <a href="{% url 'league:player' score.player.id %}">{{ score.player.handle }}</a> - {{ score.score }}
-    </li>
+    <tr>
+        <td>
+            <a href="{% url 'league:player' score.player.id %}">
+                {{ score.player.handle }}
+            </a>
+        </td>
+        <td>
+        {% if score.defeat %}
+        Y
+        {% else %}
+        -
+        {% endif %}
+        </td>
+        <td>{{ score.score }}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% endblock %}
